@@ -1,6 +1,6 @@
 import {TPhoto} from '@/types/index'
 
-export function sortPhotosByLikes(photos: TPhoto[], isSortingDescending: boolean): TPhoto[] {
+const sortPhotosByLikes = (photos: TPhoto[], isSortingDescending: boolean): TPhoto[] => {
   return [...photos].sort((a, b) => {
     if (isSortingDescending) {
       return a.likes - b.likes
@@ -9,3 +9,5 @@ export function sortPhotosByLikes(photos: TPhoto[], isSortingDescending: boolean
     }
   })
 }
+
+export default sortPhotosByLikes

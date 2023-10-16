@@ -1,20 +1,36 @@
 import Image from 'next/image'
+import {TPhoto} from '@/types/common'
+import {addPhotoToWatchlist, removePhotoFromWatchlist} from '@/helpers/index.ts'
 
 type TProps = {
-  data: any
+  data: TPhoto
+  view: string
 }
 
-const Photo = ({data}: TProps) => {
+const Photo = ({data, view}: TProps) => {
   const {
     urls: {small},
     likes,
   } = data
 
+  const handleBtnAdd = () => addPhotoToWatchlist(data)
+  const handleBtnRemove = () => removePhotoFromWatchlist(data)
+
   return (
-    <div className='w-64 '>
+    <article className='w-64 '>
       <Image src={small} className='w-64 h-60 rounded-2xl' width={400} height={200} alt='' />
       <p>Likes: {likes}</p>
-    </div>
+
+      {view === 'watchlist' ? (
+        <button onClick={handleBtnRemove} className='p-1 border-2 border-red-600 hover:bg-slate-100'>
+          Remove
+        </button>
+      ) : (
+        <button onClick={handleBtnAdd} className='p-1 border-2 border-purple-600 hover:bg-slate-100'>
+          Add to Watchlist
+        </button>
+      )}
+    </article>
   )
 }
 
